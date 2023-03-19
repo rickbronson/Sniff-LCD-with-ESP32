@@ -33,29 +33,38 @@ Just so you know what you're up against, here is what I ended up with as far as 
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/clampmeter-hookup1.png "clampmeter-hookup1")
 
 And here is the wiring diagram:
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/hookup8.png "hookup8")
 
 The MT87 clamp meter circuit board rear LCD pads ((Note: A-L are segment lines [B and C are not used], M-P are the 4 backplane lines, only M is used):
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/MT87-board-rear.png "MT87-board-rear")
 
 The MT87clamp meter circuit board front chip pads (Note: a-l are segment lines [b and c are not used], m-p are the 4 backplane lines, only m is used):
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/MT87-board-front.png "MT87-board-front")
 
 Diagram showing the segment labeling of a seven-segment-display
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/seven-segment-display.webp "seven-segment-display")
 
 Diagram showing the makeup of digits on a seven-segment-display (we are only using 0-9)
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/seven-seg-digits.png "seven-seg-digits")
 
 All segments lit on a MT87-display
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/MT87-display.png "MT87-display")
 
 Example waveforms on a 4 backplane LCD driver
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/seven-segment-waveforms.png "seven-segment-waveforms")
 
 Example scope shot of 2 backplane lines, they are the same execpt offset by one clock cycle
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/traces/trace-bp1-bp2.bmp "BP1-BP2")
 
 Example scope shot of one backplane line and one segment line
+
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/traces/trace-bp1-seg.bmp "BP1-SEG")
 
