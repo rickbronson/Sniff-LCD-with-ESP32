@@ -35,10 +35,10 @@ Just so you know what you're up against, here is what I ended up with as far as 
 And here is the wiring diagram:
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/hookup8.png "hookup8")
 
-The MT87 clamp meter circuit board rear LCD pads (Note: a-l are segment lines [b and c are not used], m-p are the 4 backplane lines, only m is used):
+The MT87 clamp meter circuit board rear LCD pads ((Note: A-L are segment lines [B and C are not used], M-P are the 4 backplane lines, only M is used):
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/MT87-board-rear.png "MT87-board-rear")
 
-The MT87clamp meter circuit board front chip pads (Note: A-L are segment lines [B and C are not used], M-P are the 4 backplane lines, only M is used):
+The MT87clamp meter circuit board front chip pads (Note: a-l are segment lines [b and c are not used], m-p are the 4 backplane lines, only m is used):
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/MT87-board-front.png "MT87-board-front")
 
 Diagram showing the segment labeling of a seven-segment-display
