@@ -2,13 +2,12 @@
 ==========================================
 
 
-```
 NOTE: This project is not for the faint of heart, it requires:
-	- a fair amount of fine point soldering
-	- an oscilloscope
-	- careful analyzing of waveforms to detect backplane and segment lines coming from the LCD controller
-	- reverse engineering of the segment map of the multiplexed LCD driver
-```
+
+- a fair amount of fine point soldering
+- an oscilloscope
+- careful analyzing of waveforms to detect backplane and segment lines coming from the LCD controller
+- reverse engineering of the segment map of the multiplexed LCD driver
 
   Have you ever wanted to extract info out of an instrument and web enable it?  I've done this a few times using a ESP8266 by using the a/d converter to read an analog value then setting up the ESP8266 in AP mode so I could get to the data.  In this example we will be acutally sending the multiplexed LCD lines to an ESP32 (which has enough a/d lines) and converting them using the a/d converter in the ESP32.  Before you proceed, you should study up on how multiplexed LCD's work and example waveforms.  In a nutshell, they have backplane and segment lines in a multiplexed fashion.  Initially we need to convert all segment lines plus just one backplane line.  We only need one backplane line since the others follow in a round-robin fashion, we just need the one to give a starting point for converting all segment lines.  In the example here we are using a MT87 v1 clamp meter.  Note that there are many versions of the MT87 clamp meter.  I used an ESP32-CAM which was a mistake as many pins on the actually ESP32 module are very difficult to solder.  It's better to use something like a ESP32-MINI where you can more easily get to all the pins of the ESP32 module.
 
@@ -34,10 +33,10 @@ Technique for finding out mapping between number segments and bits (only need 0-
   And here is the wiring diagram:
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/hookup8.png "hookup8")
 
-  The MT87 clamp meter circuit board rear (Note: b and c are not used, m-p are the 4 backplane lines):
+  The MT87 clamp meter circuit board rear (Note: a-l are segment lines [b and c are not used], m-p are the 4 backplane lines, only m is used):
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/MT87-board-rear.png "MT87-board-rear")
 
-  The MT87clamp meter circuit board front (Note: B and C are not used, M-P are the 4 backplane lines)
+  The MT87clamp meter circuit board front (Note: A-L are segment lines [B and C are not used], M-P are the 4 backplane lines, only M is used):
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/MT87-board-front.png "MT87-board-front")
 
   Diagram showing the segment labeling of a seven-segment-display
