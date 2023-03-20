@@ -29,7 +29,7 @@ Technique for finding out mapping between number segments and bits (only need 0-
 7 -> 3 get LCD segment D
 ```
 
-Once you get through all the above you can optimize everything by noticing that you don't need all 7 LCD segments to decode the digit.  Only segments g,f,e,b,a are needed so you don't need LCDsegments C and D.
+Once you get through all the above you can optimize everything by noticing that you don't need all 7 LCD segments to decode the digit.  Only segments G,F,E,B,A are needed so you don't need LCD segments C and D.
 
 ```
 line
