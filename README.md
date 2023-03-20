@@ -9,7 +9,7 @@ NOTE: This project is not for the faint of heart, it requires:
 - careful analyzing of waveforms to detect backplane and segment lines coming from the LCD controller
 - reverse engineering of the segment map of the multiplexed LCD driver
 
-Have you ever wanted to extract info out of an instrument and web enable it?  I've done this a few times using a ESP8266 by using the a/d converter to read an analog value then setting up the ESP8266 in AP mode so I could get to the data.  In this example we will be acutally sending the multiplexed LCD lines to an ESP32 (which has enough a/d lines) and converting them using the a/d converter in the ESP32.  Before you proceed, you should study up on how multiplexed LCD's work and example waveforms.  In a nutshell, they have backplane and segment lines in a multiplexed fashion.  We need to convert all segment lines plus just one backplane line.  We only need one backplane line since the others follow in a round-robin fashion, we just need the one to give a starting point for converting all segment lines.  The code strategy is to look for a zero volt to Vcc transition on the backplane line and then convert all segment lines, then wait for one cycle and repeat until we've done all four backplanes.
+Have you ever wanted to extract info out of an instrument and web enable it?  I've done this a few times using a ESP8266 by using the a/d converter to read an analog value then setting up the ESP8266 in AP mode so I could get to the data.  In this example we will be acutally sending the multiplexed LCD lines to an ESP32 (which has enough a/d lines) and converting them using the a/d converter in the ESP32.  Before you proceed, you should study up on how multiplexed LCD's work and example waveforms.  In a nutshell, they have backplane and segment lines in a multiplexed fashion.  Note that when I talk about "LCD segments" I'm talking about the actual segments that make up a 7-segment LCD display digit, when I talk about segment lines I'm talking about the lines from the LCD controller.  We need to convert all segment lines plus just one backplane line.  We only need one backplane line since the others follow in a round-robin fashion, we just need the one to give a starting point for converting all segment lines.  The code strategy is to look for a zero volt to Vcc transition on the backplane line and then convert all segment lines, then wait for one cycle and repeat until we've done all four backplanes.
 
 In the example here we are using a MT87 v1 [clamp meter](https://www.richmeters.cn/pd.jsp?id=62), bought in 2022.  Note that there are many versions of the MT87 clamp meter going back at least to 2015.  I used an ESP32-CAM which was a mistake as many pins on the actual ESP32 module are very difficult to solder.  It's better to use something like a ESP32-MINI where you can more easily get to all the pins of the ESP32 module.
 
@@ -29,6 +29,19 @@ Technique for finding out mapping between number segments and bits (only need 0-
 7 -> 3 get LCD segment D
 ```
 
+Once you get through all the above you can optimize everything by noticing that you don't need all 7 LCD segments to decode the digit.  Only segments g,f,e,b,a are needed so you don't need LCDsegments C and D.
+
+```
+line
+seg:   A   D   E   F   G   H   I   J   K   L
+bp 0:  xx  xx  4A  xx  xx  3A DIO  2A  xx  DC
+bp 1:  xx  xx  xx  4D  xx  3D  xx  2D  xx ONE
+bp 2:  xx  xx  4C  4E  3C  3G  3E  2C  2E  xx
+bp 3: DP4  4B  4G  4F  3B  3F  2B  2G  2F  AC
+```
+
+So I threw out A and L since I didn't need DP4 (decimal point) and DC, AC, and the far left "1" digit.  That left me only needing 9 channels of a/d.
+	
 Just so you know what you're up against, here is what I ended up with as far as connections:
 ![alt text](https://github.com/rickbronson/Sniff-LCD-with-ESP32/blob/master/docs/hardware/clampmeter-hookup1.png "clampmeter-hookup1")
 

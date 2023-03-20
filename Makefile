@@ -6,13 +6,14 @@ INCLUDES=-I/home/rick/boards/esp32/esp-idf/components/esp_ringbuf/include -Iconf
 
 #BUILD=esp-idf/examples/get-started/blink
 #BUILD=esp-idf/examples/peripherals/adc/dma_read
-BUILD=esp-idf/examples/peripherals/adc/single_read/adc2
+#BUILD=esp-idf/examples/peripherals/adc/single_read/adc2
 #BUILD=esp-idf/examples/peripherals/gpio/generic_gpio
+BUILD=esp-idf/examples/provisioning/wifi_prov_mgr
 
 all:
 #	cd ${BUILD}; idf.py set-target esp32; idf.py build # cleans any config you've made in menuconfig.
 	cd ${BUILD}; idf.py -p $(PORT) flash
-	cd ${BUILD}; ${HOME}/.espressif/tools/xtensa-esp32-elf/esp-2021r2-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc -Wa,-adhln -g ${INCLUDES} -c main/adc2_example_main.c > main/adc2_example_main.lst
+#	cd ${BUILD}; ${HOME}/.espressif/tools/xtensa-esp32-elf/esp-2021r2-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc -Wa,-adhln -g ${INCLUDES} -c main/adc2_example_main.c > main/adc2_example_main.lst
 #	cd ${BUILD}; idf.py -p $(PORT) monitor
 
 # All examples that built:
@@ -35,6 +36,9 @@ monitor:
 
 menuconfig:
 	cd ${BUILD}; idf.py menuconfig
+
+erase-flash:
+	cd ${BUILD}; idf.py -p $(PORT) erase-flash
 
 cleanall:
 	for subdir in `dirname $$(find esp-idf/examples -name "CMakeLists.txt")`; do \
